@@ -16,13 +16,15 @@ module.exports = async (req, res) => {
         res.render('admin/article-edit.art', {
             message: message,
             article: article,
-            link: '/admin/user-modify?id=' + id,
+            link: '/admin/article-modify?id=' + id,
             button: '修改'
         });
     }else {
         //添加操作
         res.render('admin/article-edit.art',{
-            message: message
+            message: message,
+            link : '/admin/article-add',
+            button : '添加'
         });
     }
 
