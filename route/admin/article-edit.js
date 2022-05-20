@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
         res.render('admin/article-edit.art', {
             message: message,
             article: article,
-            link: '/admin/article-modify?id=' + id,
+            link: '/admin/article-add?id=' + id,
             button: '修改'
         });
     }else {

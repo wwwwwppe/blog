@@ -13,6 +13,9 @@ module.exports = (req, res) => {
     这种写法后缀名并没有生效
     */
 
+
+    const id = req.query.id;
+
     const form = formidable({
         multiples: true,
         uploadDir: path.join(__dirname, '../', '../', 'public', 'uploads'),
@@ -46,13 +49,24 @@ module.exports = (req, res) => {
         }// 为真表示验证通过
 
 
-        await Article.create({
-            title: fields.title,
-            author: fields.author,
-            publishDate: fields.publishDate,
-            cover: file,
-            content: fields.content,
-        });
+        if (id) {
+            await Article.updateOne({_id : id},{
+                title: fields.title,
+                author: fields.author,
+                publishDate: fields.publishDate,
+                cover: file,
+                content: fields.content,
+            });
+        }else {
+            await Article.create({
+                title: fields.title,
+                author: fields.author,
+                publishDate: fields.publishDate,
+                cover: file,
+                content: fields.content,
+            });
+        }
+
         //cover 中的值和视频的并不一样
         //res.send(files);
         // 将页面重定向对文章列表页面
