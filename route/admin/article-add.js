@@ -28,36 +28,39 @@ module.exports = (req, res) => {
         // 3.files 对象类型 保存了和上传文件相关的数据
         //res.send(files.cover.path.split('public')[1]);
         let file = files.cover.filepath.split('public')[1];
-        let types = file.split('uploads\\')[1];
-        // console.log(types);
-        // console.log(file);
-        // if (!/(PNG|JPG|JPEG)/i.test(types.type)) {
-        //         file = null;
-        // }
-        // 根据名称获取文件后缀名
-        const index = types.lastIndexOf('.') // 根据文件名找到最后一个‘.’的索引
-        const suffixName = types.substring(index) // 根据索引截取，得到后缀名
+        console.log(file);
+        if (file != null) {
+            let types = file.split('uploads\\')[1];
+            // console.log(types);
+            // console.log(file);
+            // if (!/(PNG|JPG|JPEG)/i.test(types.type)) {
+            //         file = null;
+            // }
+            // 根据名称获取文件后缀名
+            const index = types.lastIndexOf('.') // 根据文件名找到最后一个‘.’的索引
+            const suffixName = types.substring(index) // 根据索引截取，得到后缀名
 
-        /**
-         正则表达式
-         $：表示以前面的字母结尾
-         i：表示忽略大小写
-         */
-        const verifyImg = /.(jpg|jpeg|gif|bmp|png)$/i // 验证
-        if (!verifyImg.test(suffixName)) {
-            file = null;
-        }// 为真表示验证通过
+            /**
+             正则表达式
+             $：表示以前面的字母结尾
+             i：表示忽略大小写
+             */
+            const verifyImg = /.(jpg|jpeg|gif|bmp|png)$/i // 验证
+            if (!verifyImg.test(suffixName)) {
+                file = null;
+            }// 为真表示验证通过
+        }
 
 
         if (id) {
-            await Article.updateOne({_id : id},{
+            await Article.updateOne({_id: id}, {
                 title: fields.title,
                 author: fields.author,
                 publishDate: fields.publishDate,
                 cover: file,
                 content: fields.content,
             });
-        }else {
+        } else {
             await Article.create({
                 title: fields.title,
                 author: fields.author,

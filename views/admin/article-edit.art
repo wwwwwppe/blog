@@ -39,7 +39,7 @@
                     <!--
                         multiple 允许用户一次性选择多个文件
                     -->
-                   <input type="file" name="cover" id="file" accept=".png,.jpg,.jpeg" >
+                   <input type="file" name="cover" id="file" accept=".png,.jpg,.jpeg,.gif" >
                    <div class="thumbnail-waper" >
                        <img class="img-thumbnail" src="{{article && (article.cover??'')}}" id="preview">
                    </div>
